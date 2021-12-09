@@ -8,8 +8,22 @@ import matplotlib.pyplot as plt
 
 random.seed(3)
 startTime = datetime.datetime.now()
-                                                                              
-  #generacion aleatoria de genes
+
+def generar_padre(longitud, geneSet, obtener_aptitud):
+    genes = []
+    while len(genes) < longitud:
+        tamañoMuestral = min(longitud - len(genes), len(geneSet))
+        genes.extend(random.sample(geneSet, tamañoMuestral))
+    aptitud = obtener_aptitud(genes)
+    return Cromosoma(genes, aptitud, Estrategias.Creación)                                                                              
+class Cromosoma:
+    def __init__(self, genes, aptitud, estrategia):
+        self.Genes = genes
+        self.Aptitud = aptitud
+        self.Estrategia = estrategia
+        self.Edad = 0
+
+#generacion aleatoria de genes
 def Padres(length):
       genes = [] 
       while len(genes) < length: 
